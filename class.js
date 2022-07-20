@@ -61,12 +61,26 @@ function showListCategory() {
       </div>
     </div>
   </div>
-</div>`
+</div>
+
+`
     }
     document.getElementById('drawTable').innerHTML = drawTable;
+    let nhac = ""
+    for (let i = 0; i < listCategory.length; i++) {
+        let value = listCategory[i].name;
+        nhac += `<option value="${value}">${listCategory[i].name}</option>`
+    }
+    document.getElementById('option').innerHTML = nhac
 }
 
 showListCategory();
+let valueSelect;
+
+function selectCategory() {
+    valueSelect = document.getElementById('option').value;
+    console.log('valueSelect ===> ', valueSelect)
+}
 
 
 function createCategory() {
@@ -115,18 +129,77 @@ function deleteCategory(id) {
     for (let i = 0; i < listCategory.length; i++) {
         if (listCategory[i].id === id) {
             listCategory.splice(i, 1)
-            break;
         }
     }
     showListCategory();
 }
-function drawOption() {
-    let drawoption = '';
-    for (let i = 0; i < listCategory.length; i++) {
-        drawoption += `<option>${listCategory[i].name}</option>`
+
+class Song{
+    id;
+    name;
+    lyric;
+    category;
+    constructor(id, name, lyric,category) {
+        this.id = id;
+        this.name = name;
+        this.lyric = lyric;
+        this.category = category;
     }
-    document.getElementById('option').innerHTML = drawoption;
+    getId(){
+        return this.id;
+    }
+    setId(id){
+        this.id = id;
+    }
+    getName(){
+        return this.name;
+    }
+    setName(name){
+        this.name = name;
+    }
+    getLyric(){
+        return this.lyric;
+    }
+    setLyric(lyric){
+        this.lyric = lyric;
+    }
+    getCategory(){
+        return this.category
+    }
+    setCattegory(category){
+        this.category = category
+    }
 }
-drawOption();
+listSong = [];
+function createSong() {
+    let nameSong = document.getElementById('nameSong').value;
+    let lyric = document.getElementById('lyric').value;
+
+    let idSong = 0;
+    if (listSong.length == 0) {
+        idSong = 1;
+    } else {
+        idSong = listSong[listSong.length - 1].id + 1;
+    }
+    let newSong = new Song(idSong, nameSong, lyric, valueSelect);
+    listSong.push(newSong);
 
 
+    showListSong()
+}
+function showListSong() {
+    let drawTableSong = '';
+
+    for (let i = 0; i < listSong.length; i++) {
+        drawTableSong += `<tr class="table table-hover"">
+                      <td>${listSong[i].id = i + 1}</td>
+                      <td>${listSong[i].name}</td>
+                       <td>${listSong[i].lyric}</td>
+                        <td>${listSong[i].category}</td>
+</tr>`
+    }
+    document.getElementById('drawTableSong').innerHTML = drawTableSong;
+
+}
+showListSong()
+selectCategory()
