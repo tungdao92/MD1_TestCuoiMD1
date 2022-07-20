@@ -126,7 +126,6 @@ function drawOption() {
         drawoption += `<option>${listCategory[i].name}</option>`
     }
     document.getElementById('option').innerHTML = drawoption;
-
 }
 drawOption();
 
