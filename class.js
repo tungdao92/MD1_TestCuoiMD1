@@ -41,23 +41,23 @@ function showListCategory() {
                     <td>${count}</td>
                     <td>${listCategory[i].name}</td>
                     <td><button style="border-radius: 50%" type="button" class="btn btn-success" onclick="updateCategory(${i})"><i class="bi bi-pencil-square"></i></button></td>
-                    <td><button style="border-radius: 50%" type="button" class="btn btn-danger" onclick="deleteCategory(${listCategory[i].id})" ><i class="bi bi-backspace-fill"></i></button></td>
+                    <td><button data-toggle="modal" data-target="#exampleModal" style="border-radius: 50%" type="button" class="btn btn-danger" ><i class="bi bi-backspace-fill"></i></button></td>
                      </tr>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        Do you want to delete?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No!</button>
+        <button type="button" class="btn btn-primary" onclick="deleteCategory(${listCategory[i].id})" data-dismiss="modal" >Yes!</button>
       </div>
     </div>
   </div>
