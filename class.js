@@ -34,20 +34,19 @@ listCategory.push(category1, category2, category3, category4);
 
 function showListCategory() {
     let drawTable = '';
-    let count = 0
     for (let i = 0; i < listCategory.length; i++) {
-        count++
+        let c = i + 1
         drawTable += `<tr class="table table-hover"">
-                    <td>${count}</td>
+                    <td>${c}</td>
                     <td>${listCategory[i].name}</td>
                     <td><button style="border-radius: 50%" type="button" class="btn btn-success" onclick="updateCategory(${i})"><i class="bi bi-pencil-square"></i></button></td>
-                    <td><button data-toggle="modal" data-target="#exampleModal" style="border-radius: 50%" type="button" class="btn btn-danger" ><i class="bi bi-backspace-fill"></i></button></td>
+                    <td><button data-toggle="modal" data-target="#exampleModal" style="border-radius: 50%" class="btn btn-danger"><i class="bi bi-backspace-fill"></i></button></td>
                      </tr>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Category!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -56,8 +55,8 @@ function showListCategory() {
         Do you want to delete?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">No!</button>
-        <button type="button" class="btn btn-primary" onclick="deleteCategory(${listCategory[i].id})" data-dismiss="modal" >Yes!</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="deleteCategory(${i})">Yes</button>
       </div>
     </div>
   </div>
@@ -66,12 +65,12 @@ function showListCategory() {
 `
     }
     document.getElementById('drawTable').innerHTML = drawTable;
-    let nhac = ""
+    let song = ""
     for (let i = 0; i < listCategory.length; i++) {
         let value = listCategory[i].name;
-        nhac += `<option value="${value}">${listCategory[i].name}</option>`
+        song += `<option value="${value}">${listCategory[i].name}</option>`
     }
-    document.getElementById('option').innerHTML = nhac
+    document.getElementById('option').innerHTML = song;
 }
 
 showListCategory();
@@ -126,57 +125,65 @@ function updateCategory(id) {
 }
 
 function deleteCategory(id) {
-    for (let i = 0; i < listCategory.length; i++) {
-        if (listCategory[i].id === id) {
-            listCategory.splice(i, 1)
-        }
-    }
+    console.log('=======', id)
+    listCategory.splice(id, 1)
     showListCategory();
 }
 
-class Song{
+class Song {
     id;
     name;
     lyric;
     category;
-    constructor(id, name, lyric,category) {
+
+    constructor(id, name, lyric, category) {
         this.id = id;
         this.name = name;
         this.lyric = lyric;
         this.category = category;
     }
-    getId(){
+
+    getId() {
         return this.id;
     }
-    setId(id){
+
+    setId(id) {
         this.id = id;
     }
-    getName(){
+
+    getName() {
         return this.name;
     }
-    setName(name){
+
+    setName(name) {
         this.name = name;
     }
-    getLyric(){
+
+    getLyric() {
         return this.lyric;
     }
-    setLyric(lyric){
+
+    setLyric(lyric) {
         this.lyric = lyric;
     }
-    getCategory(){
+
+    getCategory() {
         return this.category
     }
-    setCattegory(category){
+
+    setCattegory(category) {
         this.category = category
     }
 }
+
 listSong = [];
+
 function createSong() {
     let nameSong = document.getElementById('nameSong').value;
     let lyric = document.getElementById('lyric').value;
 
     let idSong = 0;
-    if (listSong.length == 0) {
+    if (listSong.length === 0) {
         idSong = 1;
     } else {
         idSong = listSong[listSong.length - 1].id + 1;
@@ -187,6 +194,7 @@ function createSong() {
 
     showListSong()
 }
+
 function showListSong() {
     let drawTableSong = '';
 
@@ -201,5 +209,6 @@ function showListSong() {
     document.getElementById('drawTableSong').innerHTML = drawTableSong;
 
 }
+
 showListSong()
 selectCategory()
